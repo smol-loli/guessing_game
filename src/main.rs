@@ -1,6 +1,5 @@
 use std::cmp::Ordering;
 use std::io;
-use std::process::exit;
 use rand::Rng;
 
 fn main() {
@@ -9,7 +8,6 @@ fn main() {
 
     while _valid_min_max == false {
         println!("Please select the range for the random number!");
-
 
         println!("Minimum:");
 
@@ -23,7 +21,7 @@ fn main() {
             Ok(num) => num,
             Err(_) => {
                 println!("Not a number!");
-                exit(1);
+                continue;
             },
         };
 
@@ -39,7 +37,7 @@ fn main() {
             Ok(num) => num,
             Err(_) => {
                 println!("Not a number!");
-                exit(1);
+                continue;
             },
         };
 
@@ -56,6 +54,7 @@ fn main() {
         }
 
         else {
+            println!("Please enter a minimum and a maximum that has the value of at least minimum +1");
             continue;
         }
     }
@@ -92,10 +91,8 @@ fn guess(secret_number: u32) {
                 println!("You win!");
                 println!("You only needed {trys} trys!");
                 break;
-
-            },
-        };
+                },
+            };
+        }
     }
-}
-
 }
