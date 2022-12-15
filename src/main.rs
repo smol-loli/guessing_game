@@ -3,7 +3,7 @@ use std::io;
 use rand::Rng;
 
 // TODO: put io::stdin (user input) and string to u32 conversion in get_input() function
-// TODO: Add colors to text-fields
+// TODO: Add colors to text-fields (find out how)
 
 fn main() {
 
