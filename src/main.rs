@@ -2,6 +2,8 @@ use std::cmp::Ordering;
 use std::io;
 use rand::Rng;
 
+// TODO: put io::stdin (user input) and string to u32 conversion in get_input() function
+
 fn main() {
 
     let mut _valid_min_max: bool = false;
