@@ -2,7 +2,6 @@ use std::cmp::Ordering;
 use std::io;
 use rand::Rng;
 
-// TODO: put io::stdin (user input) and string to u32 conversion in get_input() function
 // TODO: Add colors to text-fields (find out how)
 
 fn main() {
@@ -14,42 +13,18 @@ fn main() {
 
         println!("Minimum:");
 
-        let mut _random_min = String::new();
-
-        io::stdin()
-            .read_line(&mut _random_min)
-            .expect("Error: Not a valid number!");
-
-        let _random_min: u32 = match _random_min.trim().parse() {
-            Ok(num) => num,
-            Err(_) => {
-                println!("Error: Not a valid number!");
-                continue;
-            },
-        };
+        let _random_min = get_usr_input();
 
         println!("Maximum:");
 
-        let mut _random_max = String::new();
-
-        io::stdin()
-            .read_line(&mut _random_max)
-            .expect("Error: Not a valid number!");
-
-        let _random_max: u32 = match _random_max.trim().parse() {
-            Ok(num) => num,
-            Err(_) => {
-                println!("Error: Not a valid number!");
-                continue;
-            },
-        };
+        let _random_max = get_usr_input();
 
         if _random_min < _random_max {
             println!("Guess the number!");
 
             let secret_number = rand::thread_rng().gen_range(_random_min..=_random_max);
 
-            println!("Debug: The number is: {secret_number}");
+            println!("Debug(main): The secret number is: {secret_number}");
 
             _valid_min_max = true;
 
@@ -62,6 +37,8 @@ fn main() {
         }
     }
 
+
+
 fn guess(secret_number: u32) {
 
     let mut trys: u32 = 0;
@@ -69,27 +46,17 @@ fn guess(secret_number: u32) {
     loop {
         println!("Whats your guess?");
 
-        let mut guess = String::new();
-
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => {
-                println!("Error: Not a valid number!");
-                continue;
-            },
-        };
+        let guess = get_usr_input();
 
         println!("You guessed: {guess}");
 
         trys += 1;
 
+        println!("Debug(guess): The secret number is: {secret_number}");
+
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win!");
                 println!("You only needed {trys} trys!");
@@ -97,5 +64,28 @@ fn guess(secret_number: u32) {
                 },
             };
         }
+    }
+
+
+
+    fn get_usr_input() -> u32 {
+
+        let _usr_input: u32 = loop {
+
+            let mut input = String::new();
+
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Failed to read line!");
+
+            let input: u32 = match input.trim().parse() {
+                Ok(num) => num,
+                Err(_) => {
+                    print!("Error: Not a valid input!");
+                    continue;
+                },
+            };
+            return input
+        };
     }
 }
