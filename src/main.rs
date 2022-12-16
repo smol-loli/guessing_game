@@ -18,12 +18,12 @@ fn main() {
 
         io::stdin()
             .read_line(&mut _random_min)
-            .expect("Not a number!");
+            .expect("Error: Not a valid number!");
 
         let _random_min: u32 = match _random_min.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Not a number!");
+                println!("Error: Not a valid number!");
                 continue;
             },
         };
@@ -34,12 +34,12 @@ fn main() {
 
         io::stdin()
             .read_line(&mut _random_max)
-            .expect("Not a number!");
+            .expect("Error: Not a valid number!");
 
         let _random_max: u32 = match _random_max.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Not a number!");
+                println!("Error: Not a valid number!");
                 continue;
             },
         };
@@ -78,7 +78,7 @@ fn guess(secret_number: u32) {
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Not a number!");
+                println!("Error: Not a valid number!");
                 continue;
             },
         };
